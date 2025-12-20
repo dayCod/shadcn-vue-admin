@@ -30,8 +30,6 @@ defineProps({
   user: {
     type: Object,
     required: true,
-    // expected shape:
-    // { name: String, email: String, avatar: String }
   },
 })
 
