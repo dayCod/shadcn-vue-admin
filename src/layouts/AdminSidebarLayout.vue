@@ -20,7 +20,7 @@ const data = {
 const menu = [
   {
     title: 'Dashboard',
-    url: '#',
+    url: '/admin',
     icon: IconDashboard,
   },
   {
@@ -29,9 +29,9 @@ const menu = [
     children: [
       {
         title: 'Tags',
-        url: '#',
+        url: '/admin/master/tags',
         icon: IconTag,
-        isActive: true,
+        isActive: false,
       },
     ],
   },

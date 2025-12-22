@@ -7,4 +7,22 @@ export const adminRoutes = [
     component: DashboardView,
     meta: { layout: 'admin' },
   },
+  {
+    name: 'admin.master.tags',
+    path: '/admin/master/tags',
+    component: () => import('@/views/admin/master/tags/IndexView.vue'),
+    meta: { layout: 'admin' },
+  },
+  {
+    name: 'admin.master.tags.create',
+    path: '/admin/master/tags/create',
+    component: () => import('@/views/admin/master/tags/CreateView.vue'),
+    meta: { layout: 'admin' },
+  },
+  {
+    name: 'admin.master.tags.edit',
+    path: '/admin/master/tags/:id/edit',
+    component: () => import('@/views/admin/master/tags/EditView.vue'),
+    meta: { layout: 'admin' },
+  },
 ]
