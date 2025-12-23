@@ -29,6 +29,13 @@ const { handleSubmit, resetForm } = useForm({
 
 const onSubmit = handleSubmit((data) => {
   console.log(data)
+
+  resetForm({
+    values: {
+      name: '',
+      slug: '',
+    },
+  })
 })
 </script>
 
