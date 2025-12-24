@@ -4,9 +4,13 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import { Separator } from '@/components/ui/separator'
 import BreadcrumbPanel from '@/components/BreadcrumbPanel.vue'
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
+import { computed, provide } from 'vue'
+import { useAuthStore } from '@/stores/auth/AuthStore'
 
 const route = useRoute()
+const authStore = useAuthStore()
+
+provide('authUser', authStore.getUser())
 
 const collectCurrentRouteName = computed(() => {
   const currentRouteName = route.name.toString()

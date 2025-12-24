@@ -25,6 +25,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
+import { useAuthStore } from '@/stores/auth/AuthStore'
+import { useRouter } from 'vue-router'
+import { toast } from 'vue-sonner'
 
 defineProps({
   user: {
@@ -34,6 +37,14 @@ defineProps({
 })
 
 const { isMobile } = useSidebar()
+const authStore = useAuthStore()
+const router = useRouter()
+
+const logout = () => {
+  authStore.logout()
+  router.push('/login')
+  toast('Logout successful')
+}
 </script>
 
 <template>
@@ -85,24 +96,7 @@ const { isMobile } = useSidebar()
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <IconUserCircle />
-              Account
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <IconCreditCard />
-              Billing
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <IconNotification />
-              Notifications
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-
-          <DropdownMenuSeparator />
-
-          <DropdownMenuItem>
+          <DropdownMenuItem @click="logout" class="cursor-pointer">
             <IconLogout />
             Log out
           </DropdownMenuItem>

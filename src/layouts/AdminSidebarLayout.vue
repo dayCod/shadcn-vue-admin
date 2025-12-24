@@ -8,12 +8,15 @@ import { Sidebar, SidebarContent, SidebarFooter } from '@/components/ui/sidebar'
 import Separator from '@/components/ui/separator/Separator.vue'
 import NavHeader from '@/components/nav/NavHeader.vue'
 import NavMenu from '@/components/nav/NavMenu.vue'
+import { inject } from 'vue'
+
+const user = inject('authUser')
 
 const data = {
   user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    name: user.name,
+    email: user.email,
+    avatar: user.avatar ?? '/avatars/shadcn.jpg',
   },
 }
 
