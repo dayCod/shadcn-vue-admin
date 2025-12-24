@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { IconChevronRight } from '@tabler/icons-vue'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import {
@@ -12,11 +14,20 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
 
-defineProps({
+const props = defineProps({
   items: {
     type: Array,
     required: true,
   },
+})
+
+const route = useRoute()
+
+const isActiveRoute = computed(() => {
+  return (url) => {
+    if (!url) return false
+    return route.path == url
+  }
 })
 </script>
 
@@ -25,11 +36,10 @@ defineProps({
     <SidebarGroupContent class="flex flex-col gap-2">
       <SidebarMenu>
         <template v-for="item in items" :key="item.title">
-          <!-- Item with children (Collapsible) -->
           <Collapsible
             v-if="item.children"
             as-child
-            :default-open="item.isActive"
+            :default-open="isActiveRoute(item.url)"
             class="group/collapsible"
           >
             <SidebarMenuItem>
@@ -45,7 +55,7 @@ defineProps({
               <CollapsibleContent>
                 <SidebarMenuSub>
                   <SidebarMenuSubItem v-for="subItem in item.children" :key="subItem.title">
-                    <SidebarMenuSubButton as-child :is-active="subItem.isActive">
+                    <SidebarMenuSubButton as-child :is-active="isActiveRoute(subItem.url)">
                       <router-link :to="subItem.url">
                         <component :is="subItem.icon" v-if="subItem.icon" />
                         <span>{{ subItem.title }}</span>
@@ -57,9 +67,8 @@ defineProps({
             </SidebarMenuItem>
           </Collapsible>
 
-          <!-- Single Item -->
           <SidebarMenuItem v-else>
-            <SidebarMenuButton as-child :tooltip="item.title" :is-active="item.isActive">
+            <SidebarMenuButton as-child :tooltip="item.title" :is-active="isActiveRoute(item.url)">
               <router-link :to="item.url">
                 <component :is="item.icon" v-if="item.icon" />
                 <span>{{ item.title }}</span>

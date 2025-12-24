@@ -31,7 +31,6 @@ const menu = [
         title: 'Tags',
         url: '/admin/master/tags',
         icon: IconTag,
-        isActive: false,
       },
     ],
   },
